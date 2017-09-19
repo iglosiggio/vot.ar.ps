@@ -29,10 +29,13 @@ xpos ypos moveto
 
 userdict /votos known {
   votos {
-    dup 0 get show
-    xpos 100 add  ypos moveto
-    dup 1 get show
-    newline
+    dup type /arraytype eq
+    {
+      dup 0 get show
+      xpos 100 add  ypos moveto
+      dup 1 get show
+      newline
+    } if % si el voto es valido lo imprimo (sino probablemente no se asigno)
   } forall
 } if % si hay votos imprimo
 
