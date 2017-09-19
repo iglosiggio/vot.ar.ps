@@ -1,0 +1,39 @@
+/fontsize 8 def
+/Helvetica findfont fontsize scalefont setfont
+
+/xpos 20 def
+/ypos 0 def
+
+/newline {
+  /ypos ypos fontsize add def
+  ypos 830 gt {
+    % si me fui de la pagina cambio de columna
+    /xpos xpos 300 add def
+    /ypos 0 def
+  } if
+  xpos ypos moveto
+} def
+
+%/votos [
+%  [ (PABLO LESCANO) (19/09/2017 10:03:22) ]
+%  [ (PABLO LESCANO) (19/09/2017 10:05:37) ]
+%  [ (MALAFAMA)      (19/09/2017 10:05:50) ]
+%  [ (PABLO LESCANO) (19/09/2017 10:06:12) ]
+%  [ (MALAFAMA)      (19/09/2017 10:11:42) ]
+%  [ (MALAFAMA)      (19/09/2017 15:09:33) ]
+%  [ (PABLO LESCANO) (19/09/2017 15:15:22) ]
+%  [ (BLANCO)        (19/09/2017 15:17:07) ]
+%] def
+
+xpos ypos moveto
+
+userdict /votos known {
+  votos {
+    dup 0 get show
+    xpos 100 add  ypos moveto
+    dup 1 get show
+    newline
+  } forall
+} if % si hay votos imprimo
+
+showpage
