@@ -1,15 +1,16 @@
 %-12345X@PJL ENTER LANGUAGE = POSTSCRIPT
 %!
 
+% El trucazo para poder definir cosas en userdict y que queden entre impresiones
+true 0 startjob pop
+
 % Sacar la fecha actual
 /ahoramesmo {
   (%Calendar%) /IODevice resourcestatus
+  3 1 roll pop pop
   { (%Calendar%) currentdevparams /DateTime get }
   { (Not available) } ifelse
 } def
-
-% El trucazo para poder definir cosas en userdict y que queden entre impresiones
-true 0 startjob pop
 
 
 % Al redefinir `showpage` hay que poner un valor magico para triggerear las acciones
@@ -41,7 +42,7 @@ true 0 startjob pop
     lista1 eq { sumarvoto } if % Si es la lista uno sumo el voto
     dup
     lista2 eq { sumarvoto } if % Si es la lista dos sumo el voto
-  }
+  } if
   systemdict /showpage get exec
 } def
 
