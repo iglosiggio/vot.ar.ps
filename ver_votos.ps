@@ -5,35 +5,51 @@
 %%DocumentData: Clean7Bit
 %%LanguageLevel: 2
 %%DocumentMedia: A4 595 842 0 () ()
-%%BoundingBox: 31 24 86 274
+%%BoundingBox: 20 40 575 802
 %%EndComments
 
 /fontsize 8 def
 /Helvetica findfont fontsize scalefont setfont
 
 /xpos 20 def
-/ypos 40 def
+/ypos 802 def
 
 /newline {
-  /ypos ypos fontsize add def
-  ypos 790 gt {
+  /ypos ypos fontsize sub def
+  ypos 40 lt {
     % si me fui de la pagina cambio de columna
     /xpos xpos 300 add def
-    /ypos 40 def
+    /ypos 802 def
   } if
   xpos ypos moveto
 } def
 
 userdict /votos known not {
   /votos [
-    [ (PRUEBA) (19/09/2017 10:03:22) ]
+    [ (LISTA 1 - FACIL Y RAPIDO) (19/09/2017 10:03:22) ]
+    dup dup dup dup dup dup dup dup dup
+    dup dup dup dup dup dup dup dup dup
     [ (PRUEBA) (19/09/2017 10:05:37) ]
-    [ (PRUEBA) (19/09/2017 10:05:50) ]
+    dup dup dup dup dup dup dup dup dup
+    dup dup dup dup dup dup dup dup dup
+    [ (LISTA 2 - ILUSIONISTAS INFORMATICOS) (19/09/2017 10:05:50) ]
+    dup dup dup dup dup dup dup dup dup
+    dup dup dup dup dup dup dup dup dup
     [ (PRUEBA) (19/09/2017 10:06:12) ]
+    dup dup dup dup dup dup dup dup dup
+    dup dup dup dup dup dup dup dup dup
     [ (PRUEBA) (19/09/2017 10:11:42) ]
+    dup dup dup dup dup dup dup dup dup
+    dup dup dup dup dup dup dup dup dup
     [ (PRUEBA) (19/09/2017 15:09:33) ]
+    dup dup dup dup dup dup dup dup dup
+    dup dup dup dup dup dup dup dup dup
     [ (PRUEBA) (19/09/2017 15:15:22) ]
+    dup dup dup dup dup dup dup dup dup
+    dup dup dup dup dup dup dup dup dup
     [ (BLANCO) (19/09/2017 15:17:07) ]
+    dup dup dup dup dup dup dup dup dup
+    dup dup dup dup dup dup dup dup dup
   ] def
 } if % si no hay votos muestro la pagina de prueba
 
@@ -43,7 +59,7 @@ votos {
   dup type /arraytype eq
   {
     dup 0 get show
-    xpos 100 add  ypos moveto
+    xpos 160 add  ypos moveto
     dup 1 get show
     newline
   } if % si el voto es valido lo imprimo (sino probablemente no se asigno)

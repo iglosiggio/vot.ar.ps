@@ -5,17 +5,45 @@
 %%DocumentData: Clean7Bit
 %%LanguageLevel: 2
 %%DocumentMedia: A4 595 842 0 () ()
-%%BoundingBox: 31 24 86 274
+%%BoundingBox: 0 0 595 842
 %%EndComments
 
 % El trucazo para poder definir cosas en userdict y que queden entre impresiones
 true 0 startjob pop
 
+% collection key getbehind (collection key get) collection
+/getbehind {
+  1 index 3 1 roll get exch
+} bind def
+
+/arraymap {
+  [ 2 index 3 2 roll forall ] exch pop
+} bind def
+
+%robado de https://en.wikibooks.org/wiki/PostScript_FAQ#How_to_concatenate_strings.3F
+/concatstringarray  %  [(a) (b) ... (z)] --> (ab...z)  
+{ 0 1 index { length add } forall string     
+  0 3 2 roll      
+  { 3 copy putinterval
+    length add 
+  }
+  forall pop  
+} bind def
+
 % Sacar la fecha actual
 /ahoramesmo {
   (%Calendar%) /IODevice resourcestatus
   3 1 roll pop pop
-  { (%Calendar%) currentdevparams /DateTime get }
+  {
+    (%Calendar%) currentdevparams
+    dup /DateTime known
+    { /DateTime get }
+    { [ exch
+        /Day getbehind (/) exch /Month getbehind (/) exch /Year getbehind
+        ( ) exch
+        /Hour getbehind (:) exch /Minute getbehind (:) exch /Second get
+      ] { 128 string cvs } arraymap concatstringarray } ifelse
+  }
   { (Not available) } ifelse
 } def
 
@@ -55,19 +83,19 @@ true 0 startjob pop
 % Imprimo algo
 false 0 startjob pop
 
-/ypos 800 def
+/fontsize 48 def
+
+/ypos 780 def
 /newline {
-  100 ypos moveto
-  /ypos ypos 14 sub def
+  40 ypos moveto
+  /ypos ypos fontsize sub def
 } def
 
-/Courier findfont 12 scalefont setfont
-newline (Impresora kakeada) show
-newline (Creados:) show
-newline (    - /votos      (array))         show
-newline (    - /currvoto   (variable))      show
-newline (    - /cantvotos  (constante))     show
-newline (    - /sumarvoto  (procedimiento)) show
-newline (    - /pushvoto   (procedimiento)) show
-newline (    - /ahoramesmo (procedimiento)) show
+/Courier findfont fontsize scalefont setfont
+newline (Acta de apertura) show
+/fontsize 24 def
+/Courier findfont fontsize scalefont setfont
+newline (Fecha de apertura: ) show ahoramesmo show
+newline (  Maquina de voto: Impresora) show
+newline (            Lugar: ekoparty2017) show
 showpage
