@@ -4,7 +4,7 @@ Postscript-based voting system
 Tested on a lexmark T652dn using _Atril_ for preview and print dialog of the PS files
 
 Instructions:
-  1. Print `acta_de_apertura.ps`
+  1. Print `acta_de_apertura.ps`  
   2. Print normally, if you want to print a vote try `lista1.ps`or `lista2.ps`
   3. Print `acta_de_cierre.ps` to see the votes printed with their respective emission datetime
   4. ???
