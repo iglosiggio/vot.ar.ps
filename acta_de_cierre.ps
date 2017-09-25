@@ -47,6 +47,15 @@ userdict /votos known not {
     [ (BLANCO) (19/09/2017 15:17:07) ]
     dup dup dup dup dup dup dup dup dup
     dup dup dup dup dup dup dup dup dup
+    null null null null null null null
+    null null null null null null null
+    null null null null null null null
+    null null null null null null null
+    null null null null null null null
+    null null null null null null null
+    null null null null null null null
+    null null null null null null null
+    null null null null null null null
   ] def
   /ahoramesmo (29/09/2017 18:00:00) def
 } if % si no hay votos muestro la pagina de prueba
@@ -62,7 +71,8 @@ userdict /votos known not {
 40 780 72 sub moveto
 (          Lugar: ekoparty2017) show
 40 780 120 sub moveto
-( Cant. de votos: ) show votos length 10 string cvs show
+( Cant. de votos: ) show 
+0 votos { type /nulltype ne { 1 add } if } forall 10 string cvs show
 showpage
 
 /fontsize 8 def
@@ -80,6 +90,6 @@ votos {
   } if % si el voto es valido lo imprimo (sino probablemente no se asigno)
 } forall
 
-showpage
+%showpage
 %%Trailer
 %%EOF
