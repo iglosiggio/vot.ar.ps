@@ -1,15 +1,12 @@
 %!PS-Adobe-3.0
 %%Creator: Ignacio E. Losiggio
 %%CreationDate: Wed Sep 20 11:23:00 2017
-%%Pages: 1
+%%Pages: 2
 %%DocumentData: Clean7Bit
 %%LanguageLevel: 2
 %%DocumentMedia: A4 595 842 0 () ()
 %%BoundingBox: 20 40 575 802
 %%EndComments
-
-/fontsize 8 def
-/Helvetica findfont fontsize scalefont setfont
 
 /xpos 20 def
 /ypos 802 def
@@ -51,7 +48,25 @@ userdict /votos known not {
     dup dup dup dup dup dup dup dup dup
     dup dup dup dup dup dup dup dup dup
   ] def
+  /ahoramesmo (29/09/2017 18:00:00) def
 } if % si no hay votos muestro la pagina de prueba
+
+/Courier findfont 48 scalefont setfont
+40 780 moveto
+(Acta de cierre) show
+/Courier findfont 24 scalefont setfont
+40 780 24 sub moveto
+(Fecha de cierre: ) show ahoramesmo show
+40 780 48 sub moveto
+(Maquina de voto: Impresora) show
+40 780 72 sub moveto
+(          Lugar: ekoparty2017) show
+40 780 120 sub moveto
+( Cant. de votos: ) show votos length 10 string cvs show
+showpage
+
+/fontsize 8 def
+/Helvetica findfont fontsize scalefont setfont
 
 xpos ypos moveto
 
