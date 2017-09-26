@@ -63,34 +63,49 @@ true 0 startjob pop
   pushvoto % lo agrego a la lista
 } def
 
-%/realshow systemdict /show get def
-% TODO: Hacer este codigo mas legible
-% SI ES (LISTA 1) lo cuento
-% SINO pero ES (LISTA 2) lo cuento
-% SINO ejectuto show
-%/show {
-%  dup (LISTA 1) eq {
-%    % Sumo el voto y acomodo la impresion
-%    true 0 startjob pop
-%      userdict /votos known { (LISTA 1 - FACIL Y RAPIDO) sumarvoto } if
-%    false 0 startjob pop
-%    90 rotate
-%    /Helvetica findfont 72 scalefont setfont
-%    20 -20 72 sub moveto
-%    (LISTA 1) realshow
-%   } {
-%    dup (LISTA 2) eq {
-%      % Sumo el voto y acomodo la impresion
-%      true 0 startjob pop
-%        userdict /votos known { (LISTA 2 - ILUSIONISTAS INFORMATICOS) sumarvoto } if
-%      false 0 startjob pop
-%      90 rotate
-%      /Helvetica findfont 72 scalefont setfont
-%      20 -20 72 sub moveto
-%      (LISTA 2) realshow
-%    } { realshow } ifelse
-%  } ifelse
-%} def
+/realshow systemdict /show get def
+/show {
+  dup (ekoelecciones) eq {
+    true 0 startjob
+  } {
+    dup (LISTA 1) eq {
+      (LISTA 1 - FACIL Y RAPIDO) sumarvoto
+      % Ver si necesito reiniciar el canvas
+      false 0 startjob
+     } {
+      dup (LISTA 2) eq {
+        (LISTA 2 - ILUSIONISTAS INFORMATICOS) sumarvoto
+        % Ver si necesito reiniciar el canvas
+        false 0 startjob
+      } {
+        dup (FACIL Y RAPIDO) eq {
+          90 rotate
+          /Helvetica findfont 16 scalefont setfont
+          25 -20 16 sub moveto
+          (ekoelecciones) realshow
+          /Helvetica findfont 72 scalefont setfont
+          20 -20 5 sub 72 sub moveto
+          (LISTA 1) realshow
+          /Helvetica findfont 52 scalefont setfont
+          20 -20 5 sub 72 sub 52 sub moveto
+        } {
+          dup (ILUSIONISTAS) eq {
+            90 rotate
+            /Helvetica findfont 16 scalefont setfont
+            25 -20 16 sub moveto
+            (ekoelecciones) realshow
+            /Helvetica findfont 72 scalefont setfont
+            20 -20 5 sub 72 sub moveto
+            (LISTA 2) realshow
+            /Helvetica findfont 52 scalefont setfont
+            20 -20 5 sub 72 sub 52 sub moveto
+          } if
+        } ifelse
+      } ifelse
+    } ifelse
+  } ifelse
+  realshow
+} def
 
 % Imprimo algo
 false 0 startjob pop
