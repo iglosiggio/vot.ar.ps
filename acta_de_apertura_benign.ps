@@ -8,9 +8,6 @@
 %%BoundingBox: 0 0 595 842
 %%EndComments
 
-% El trucazo para poder definir cosas en userdict y que queden entre impresiones
-true 0 startjob pop
-
 % collection key getbehind (collection key get) collection
 /getbehind {
   1 index 3 1 roll get exch
@@ -47,25 +44,7 @@ true 0 startjob pop
   { (Not available) } ifelse
 } def
 
-/cantvotos 300 def
-/currvoto 0 def % Las mesas no tienen mas de 400 votantes en general
-/votos cantvotos array def
-
-/pushvoto {
-  votos currvoto 3 -1 roll % acomodo el stack
-  put % sumo el voto
-  /currvoto currvoto 1 add cantvotos mod def % incremento el voto actual
-} def
-
-/sumarvoto {
-  % Tiene que tomar la fecha y hora, la lista y agregarla al array de votos
-  [ exch ahoramesmo ] % creo el voto
-  pushvoto % lo agrego a la lista
-} def
-
 % Imprimo algo
-false 0 startjob pop
-
 /fontsize 48 def
 
 /ypos 780 def
