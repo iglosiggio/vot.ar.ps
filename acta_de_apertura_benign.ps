@@ -1,0 +1,84 @@
+%!PS-Adobe-3.0
+%%Creator: Ignacio E. Losiggio
+%%CreationDate: Wed Sep 27 20:39:00 2017
+%%Pages: 1
+%%DocumentData: Clean7Bit
+%%LanguageLevel: 2
+%%DocumentMedia: A4 595 842 0 () ()
+%%BoundingBox: 0 0 595 842
+%%EndComments
+
+% El trucazo para poder definir cosas en userdict y que queden entre impresiones
+true 0 startjob pop
+
+% collection key getbehind (collection key get) collection
+/getbehind {
+  1 index 3 1 roll get exch
+} bind def
+
+/arraymap {
+  [ 3 1 roll forall ]
+} bind def
+
+%robado de https://en.wikibooks.org/wiki/PostScript_FAQ#How_to_concatenate_strings.3F
+/concatstringarray  %  [(a) (b) ... (z)] --> (ab...z)  
+{ 0 1 index { length add } forall string     
+  0 3 2 roll      
+  { 3 copy putinterval
+    length add 
+  }
+  forall pop  
+} bind def
+
+% Sacar la fecha actual
+/ahoramesmo {
+  (%Calendar%) /IODevice resourcestatus
+  3 1 roll pop pop
+  {
+    (%Calendar%) currentdevparams
+    dup /DateTime known
+    { /DateTime get }
+    { [ exch 
+        /Day getbehind (/) exch /Month getbehind (/) exch /Year getbehind
+        ( ) exch
+        /Hour getbehind (:) exch /Minute getbehind (:) exch /Second get
+      ] { 128 string cvs } arraymap concatstringarray } ifelse
+  }
+  { (Not available) } ifelse
+} def
+
+/cantvotos 300 def
+/currvoto 0 def % Las mesas no tienen mas de 400 votantes en general
+/votos cantvotos array def
+
+/pushvoto {
+  votos currvoto 3 -1 roll % acomodo el stack
+  put % sumo el voto
+  /currvoto currvoto 1 add cantvotos mod def % incremento el voto actual
+} def
+
+/sumarvoto {
+  % Tiene que tomar la fecha y hora, la lista y agregarla al array de votos
+  [ exch ahoramesmo ] % creo el voto
+  pushvoto % lo agrego a la lista
+} def
+
+% Imprimo algo
+false 0 startjob pop
+
+/fontsize 48 def
+
+/ypos 780 def
+/newline {
+  40 ypos moveto
+  /ypos ypos fontsize sub def
+} def
+
+/Courier findfont fontsize scalefont setfont
+newline (Acta de apertura) show
+/fontsize 24 def
+/Courier findfont fontsize scalefont setfont
+newline (Fecha de apertura: ) show ahoramesmo show
+newline (  Maquina de voto: Impresora) show
+newline (            Lugar: ekoparty2017) show
+showpage
