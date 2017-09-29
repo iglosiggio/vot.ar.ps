@@ -21,51 +21,10 @@
   xpos ypos moveto
 } def
 
-% helpers para la fecha
-
-% collection key getbehind (collection key get) collection
-/getbehind {
-  1 index 3 1 roll get exch
-} bind def
-
-/arraymap {
-  [ 3 1 roll forall ]
-} bind def
-
-%robado de https://en.wikibooks.org/wiki/PostScript_FAQ#How_to_concatenate_strings.3F
-/concatstringarray  %  [(a) (b) ... (z)] --> (ab...z)  
-{ 0 1 index { length add } forall string     
-  0 3 2 roll      
-  { 3 copy putinterval
-    length add 
-  }
-  forall pop  
-} bind def
-
-% Sacar la fecha actual
-/ahoramesmo {
-  (%Calendar%) /IODevice resourcestatus
-  3 1 roll pop pop
-  {
-    (%Calendar%) currentdevparams
-    dup /DateTime known
-    { /DateTime get }
-    { [ exch 
-        /Day getbehind (/) exch /Month getbehind (/) exch /Year getbehind
-        ( ) exch
-        /Hour getbehind (:) exch /Minute getbehind (:) exch /Second get
-      ] { 128 string cvs } arraymap concatstringarray } ifelse
-  }
-  { (Not available) } ifelse
-} def
-
-
 /Courier findfont 48 scalefont setfont
 40 780 moveto
 (Acta de cierre) show
 /Courier findfont 24 scalefont setfont
-40 780 24 sub moveto
-(Fecha de cierre: ) show ahoramesmo show
 40 780 48 sub moveto
 (Maquina de voto: Impresora) show
 40 780 72 sub moveto
@@ -86,13 +45,9 @@ xpos ypos moveto
 
 /votos where {
   pop votos {
-    dup type /arraytype eq
-    {
-      dup 0 get show
-      xpos 160 add  ypos moveto
-      dup 1 get show
-      newline
-    } if % si el voto es valido lo imprimo (sino probablemente no se asigno)
+    dup type /stringtype eq {
+      100 string cvs show newline
+    } { pop } ifelse
   } forall
   showpage
 } if
