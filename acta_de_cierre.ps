@@ -49,7 +49,14 @@ xpos ypos moveto
       100 string cvs show newline
     } { pop } ifelse
   } forall
-  showpage
 } if
+
+45 rotate
+172 48 moveto
+/Helvetica-Bold findfont 48 scalefont setfont
+(NO ES UNA IMPRESORA) show
+172 0 moveto
+(ES UNA COMPUTADORA) show
+showpage
 %%Trailer
 %%EOF
