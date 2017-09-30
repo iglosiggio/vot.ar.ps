@@ -10,3 +10,8 @@ Instructions:
   4. ???
   5. Profit!
   6. It's not a printer, it's a computer!
+
+
+## Note
+This branch has the state of the project on the ekoparty 2017 flashtalk, if updated the [master](https://github.com/iglosiggio/vot.ar.ps/tree/master)
+branch will add characteristics and/or explainations.
