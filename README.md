@@ -13,5 +13,5 @@ Instructions:
 
 
 ## Note
-This branch has the state of the project on the ekoparty 2017 flashtalk, if updated the [master](https://github.com/iglosiggio/vot.ar.ps/tree/master)
+This branch has the state of the project on the [ekoparty 2017 flashtalk](https://www.youtube.com/watch?v=toEAdYo7Ft0), if updated the [master](https://github.com/iglosiggio/vot.ar.ps/tree/master)
 branch will add characteristics and/or explainations.
